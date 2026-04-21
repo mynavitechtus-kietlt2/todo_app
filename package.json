@@ -12,13 +12,17 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs}/**/*.ts\" --fix"
+    "lint": "eslint \"{src,apps,libs}/**/*.ts\" --fix",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "prisma db seed"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.2.6",
+    "@prisma/client": "^6.19.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
     "reflect-metadata": "^0.2.2",
@@ -36,10 +40,15 @@
     "eslint-plugin-prettier": "^5.2.2",
     "globals": "^17.0.0",
     "prettier": "^3.4.2",
+    "prisma": "^6.19.3",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

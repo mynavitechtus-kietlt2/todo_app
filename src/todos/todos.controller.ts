@@ -62,7 +62,7 @@ export class TodosController {
   create(
     @Body() dto: CreateTodoDto,
     @Headers('x-user-id') userIdHeader?: string,
-  ): Todo {
+  ): Promise<Todo> {
     const userId = this.resolveUserId(userIdHeader);
     return this.todosService.create(dto, userId);
   }
@@ -75,7 +75,7 @@ export class TodosController {
   findOne(
     @Param('id', ParseIntPipe) id: number,
     @Headers('x-user-id') userIdHeader?: string,
-  ): Todo {
+  ): Promise<Todo> {
     const userId = this.resolveUserId(userIdHeader);
     return this.todosService.findOne(id, userId);
   }
@@ -90,7 +90,7 @@ export class TodosController {
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateTodoDto,
     @Headers('x-user-id') userIdHeader?: string,
-  ): Todo {
+  ): Promise<Todo> {
     const userId = this.resolveUserId(userIdHeader);
     return this.todosService.update(id, userId, dto);
   }
@@ -104,9 +104,9 @@ export class TodosController {
   remove(
     @Param('id', ParseIntPipe) id: number,
     @Headers('x-user-id') userIdHeader?: string,
-  ): void {
+  ): Promise<void> {
     const userId = this.resolveUserId(userIdHeader);
-    this.todosService.remove(id, userId);
+    return this.todosService.remove(id, userId);
   }
 
   private resolveUserId(raw?: string): number {
